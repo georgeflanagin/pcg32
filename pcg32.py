@@ -39,16 +39,13 @@ try:
 except ImportError as e:
     sys.stderr.write('You need to install numpy.\n')
 
-def pcg32(param1:np.uint64=None, param2:np.uint64=None, return_np_int:bool=True) -> np.uint32:
+def pcg32(param1:np.uint64=None, param2:np.uint64=None) -> np.uint32:
     """
     All we ever do is call this over and over, so let's make it
     a generator instead of a class.
 
     param1 -- initial state of the engine.
     param2 -- the increment.
-    return_np_int -- there are cases where returning a numpy int is
-        not the right course of action. Normally it is correct
-        to "start with numpy, stay with numpy."
 
     yields -- an int, of which 32 bits are suitable scrambled.
     """
@@ -72,8 +69,7 @@ def pcg32(param1:np.uint64=None, param2:np.uint64=None, return_np_int:bool=True)
         engine[0] = old_state * multiplier + (inc | big_1)
         xorshifted = np.uint32(((old_state >> big_18) ^ old_state) >> big_27)
         rot = np.uint32(old_state >> big_59)
-        result = np.uint32((xorshifted >> rot) | (xorshifted << ((-rot) & big_31)))
-        yield result if return_np_int else int(result)
+        yield np.uint32((xorshifted >> rot) | (xorshifted << ((-rot) & big_31)))
 
 
 if __name__=='__main__':
