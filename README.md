@@ -11,10 +11,20 @@ The single file contains everything you need, and the one function is a generato
 to invoke it with `next()`. There is a short program at the bottom that exercises the generator
 and prints the results, giving you some ideas. In your own code it will probably look like this
 
-```
-
+```python
 import pcg32
 
-my_generator = pcg32(state, inc)
+# create an instance using random initialization
+my_generator = pcg32()
+
+# create something repeatable by supplying values
+my_generator = pcg32(initial_state, an_increment)
+
+# If you need a generator expression around the generator, using a generator for the number
+# you need.
+
 one_million_ints = (next(my_generator) for i in range(0, 1000000))
+
+# If you need a list.
+one_thousand_ints = [ next(my_generator) for i in range(0, 1000) ]
 ```
