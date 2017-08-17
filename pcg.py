@@ -39,7 +39,7 @@ try:
 except ImportError as e:
     sys.stderr.write('You need to install numpy.\n')
 
-def pcg32(param1:np.uint64, param2:np.uint64, return_np_int:bool=True) -> np.uint32:
+def pcg32(param1:np.uint64=None, param2:np.uint64=None, return_np_int:bool=True) -> np.uint32:
     """
     All we ever do is call this over and over, so let's make it
     a generator instead of a class.
@@ -52,7 +52,11 @@ def pcg32(param1:np.uint64, param2:np.uint64, return_np_int:bool=True) -> np.uin
 
     yields -- an int, of which 32 bits are suitable scrambled.
     """
+
     np.seterr(all='ignore') # remove overflow messages.
+
+    if param1 is None: param1 = random.random() * 9223372036854775807
+    if param2 is None: param2 = random.random() * 9223372036854775807
 
     engine = np.array([param1, param2], dtype='uint64')
     multiplier = np.uint64(6364136223846793005)
