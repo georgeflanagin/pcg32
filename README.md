@@ -1,7 +1,7 @@
 # pcg32
 A Python implementation of the PCG32 algorithm by Melissa O'Reilly
 
-Professor O'Reilly has a great paper on the subject: `http://www.pcg-random.org/pdf/hmc-cs-2014-0905.pdf` 
+Professor O'Neill has a great paper on the subject: `http://www.pcg-random.org/pdf/hmc-cs-2014-0905.pdf` 
 I'm not kidding. This paper is readable and somewhat humorous; I wish I could say the same about my own
 papers. And there is a *great* quote in the paper that appears on my website's quote list
 `http://georgeflanagin.com/quotes.php#oneill`:
